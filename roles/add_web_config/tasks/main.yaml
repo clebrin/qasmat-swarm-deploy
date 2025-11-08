@@ -1,0 +1,44 @@
+---
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "u=rwx,g=rx,o=rx"
+  loop:
+  - /authelia
+  - /authelia/authelia-users
+  - /authelia/authelia-config
+  - /redis
+  - /redis/data
+  - /caddy
+  - /caddy/data
+  - /caddy/config
+  - /webclient
+  - /webclient/config
+
+- name: Copy configuration files and secrets
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "u=rwx,g=rx,o=rx"
+  loop:
+  - src: configuration.yml.j2
+    dest: /authelia/authelia-config/configuration.yml
+  - src: users.yml.j2
+    dest: /authelia/authelia-users/users.yml
+  - src: Caddyfile.j2
+    dest: /caddy/config/Caddyfile
+  - src: config.json.j2
+    dest: /webclient/config/config.json
+  - src: redis_password.secret.j2
+    dest: /opt/docker-swarm/redis_password.secret
+  - src: jwt.secret.j2
+    dest: /opt/docker-swarm/jwt.secret
+  - src: session.secret.j2
+    dest: /opt/docker-swarm/session.secret
+  - src: storage_encryption_key.secret.j2
+    dest: /opt/docker-swarm/storage_encryption_key.secret

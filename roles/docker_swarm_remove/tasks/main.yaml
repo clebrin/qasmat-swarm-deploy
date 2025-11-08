@@ -1,0 +1,4 @@
+---
+- name: Remove the Docker Swarm stack using command
+  ansible.builtin.command: >
+    docker stack rm qasmat

@@ -1,0 +1,16 @@
+---
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "u=rwx,g=,o="
+  loop:
+  - /Qasmat
+  - /Qasmat/database
+  - /Qasmat/config
+  - /Qasmat/share_storage_{{ storage1 }}
+  - /Qasmat/share_storage_{{ storage2 }}
+  - /Qasmat/share_storage_{{ storage3 }}
+  - /opt/docker-swarm

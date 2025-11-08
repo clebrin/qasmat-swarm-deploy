@@ -1,0 +1,17 @@
+---
+- name: Log in to GHCR
+  community.docker.docker_login:
+    registry_url: ghcr.io
+    username: "{{ github.username }}"
+    password: "{{ github.token }}"
+  when: (github.token is defined) and (github.username is defined)
+- name: Pull images
+  community.docker.docker_image:
+    name: "{{ item }}"
+    source: pull
+  loop:
+  - "{{ docker_images.repository }}/{{ docker_images.web.name }}:{{ docker_images.web.tag }}"
+  - "{{ docker_images.repository }}/{{ docker_images.storage.name }}:{{ docker_images.storage.tag }}"
+  - "{{ docker_images.repository }}/{{ docker_images.proxy.name }}:{{ docker_images.proxy.tag }}"
+  - docker.io/authelia/authelia:latest
+  - redis:latest

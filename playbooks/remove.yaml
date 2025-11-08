@@ -1,0 +1,6 @@
+---
+- name: Deploy
+  hosts: _master
+  become: true
+  roles:
+  - role: docker_swarm_remove

@@ -1,0 +1,32 @@
+---
+- name: Setup docker-swarm master
+  hosts: _master
+  become: true
+  roles:
+  - role: add_qasmat_dir
+  - role: install
+  - role: docker_swarm_master
+
+- name: Setup docker-swarm worker
+  hosts: _worker
+  become: true
+  roles:
+  - role: add_qasmat_dir
+  - role: install
+  - role: docker_swarm_worker
+
+- name: Add qasmat config
+  hosts:
+  - _master
+  - _worker
+  become: true
+  roles:
+  - role: add_qasmat_config
+  - role: add_web_config
+  - role: docker_login_pull
+
+- name: Deploy the docker-swarm stack
+  hosts: _master
+  become: true
+  roles:
+  - role: docker_swarm_deploy

@@ -1,0 +1,16 @@
+---
+- name: Add qasmat config
+  hosts:
+  - _master
+  - _worker
+  become: true
+  roles:
+  - role: add_web_config
+  - role: add_qasmat_config
+  - role: docker_login_pull
+
+- name: Deploy
+  hosts: _master
+  become: true
+  roles:
+  - role: docker_swarm_deploy

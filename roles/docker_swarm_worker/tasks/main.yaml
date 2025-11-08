@@ -1,0 +1,9 @@
+---
+- name: Join the swarm as a worker
+  community.docker.docker_swarm:
+    state: join
+    advertise_addr: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
+    join_token: "{{ lookup('file', '~/.swarm_join_token') }}"
+    remote_addrs: [ "{{ hostvars[groups['_master'][0]]['ansible_host'] }}:2377" ]
+  register: swarm_join
+  changed_when: swarm_join.changed

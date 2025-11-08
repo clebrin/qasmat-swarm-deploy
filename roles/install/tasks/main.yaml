@@ -1,0 +1,54 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install required packages
+  ansible.builtin.apt:
+    name:
+    - ca-certificates
+    - curl
+    - python3-debian
+    state: present
+
+- name: Download Docker GPG key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc # This is the required local path
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Add Docker repository using deb822_repository
+  ansible.builtin.deb822_repository:
+    name: docker
+    types: [ deb ]
+    uris: https://download.docker.com/linux/ubuntu
+    suites: "{{ ansible_distribution_release }}"
+    components: [ stable ]
+    # CRITICAL FIX: Map x86_64 to the required Docker 'amd64'
+    architectures:
+    - "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+    signed_by: /etc/apt/keyrings/docker.asc
+    state: present
+
+- name: Update apt cache again
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install Docker
+  ansible.builtin.apt:
+    name:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
+    - python3-docker
+    state: present
+
+- name: Ensure Docker service is running
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes

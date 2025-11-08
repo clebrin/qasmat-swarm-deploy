@@ -1,0 +1,44 @@
+all:
+  children:
+    _master:
+      hosts:
+        proxy:
+          ansible_host: 0.0.0.0
+    _worker:
+      hosts:
+        storage1:
+          ansible_host: 0.0.0.0
+        storage2:
+          ansible_host: 0.0.0.0
+        storage3:
+          ansible_host: 0.0.0.0
+        web:
+          ansible_host: 0.0.0.0
+  vars:
+    ansible_user: ubuntu
+    ansible_port: 22
+    # Github credentials in case you are pulling private images
+    github:
+      # Personal access token and username
+      token:
+      username: # Storage names, must be unique
+    storage1: storage1_name
+    storage2: storage2_name
+    storage3: storage3_name
+    # Domain names for the webapp, authentication and qasmat's api
+    web_dns: subdomain1.domain.com
+    auth_dns: subdomain2.domain.com
+    api_dns: subdomain2.domain.com
+    domain: domain.com
+    # Docker images (names and versions are coming soon)
+    docker_images:
+      repository: ghcr.io/veriqloud
+      web:
+        name:
+        tag: v0.11.1
+      storage:
+        name:
+        tag: v0.2.23
+      proxy:
+        name:
+        tag: v0.2.23
