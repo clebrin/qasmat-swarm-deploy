@@ -6,4 +6,4 @@
 *.secret
 *.secret.j2
 inv_*
-inventory.yaml
+inventory.yml

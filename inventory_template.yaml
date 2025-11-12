@@ -3,42 +3,40 @@ all:
     _master:
       hosts:
         proxy:
-          ansible_host: 0.0.0.0
+          ansible_host: # TODO : IP of the proxy, e.g. 0.0.0.0
     _worker:
       hosts:
         storage1:
-          ansible_host: 0.0.0.0
+          ansible_host: # TODO : IP of storage 1, e.g. 0.0.0.0
         storage2:
-          ansible_host: 0.0.0.0
+          ansible_host: # TODO : IP of storage 2, e.g. 0.0.0.0
         storage3:
-          ansible_host: 0.0.0.0
+          ansible_host: # TODO : IP of storage 3, e.g. 0.0.0.0
         web:
-          ansible_host: 0.0.0.0
+          ansible_host: # TODO : IP of the web server, e.g. 0.0.0.0
   vars:
     ansible_user: ubuntu
     ansible_port: 22
-    # Github credentials in case you are pulling private images
     github:
-      # Personal access token and username
-      token:
-      username: # Storage names, must be unique
-    storage1: storage1_name
-    storage2: storage2_name
-    storage3: storage3_name
+      token: # TODO : GitHub token provided by VeriQloud
+      username: # TODO : GitHub username associated with the token
+    # Storage names must be differents
+    storage1: # TODO e.g. storage1_name
+    storage2: # TODO e.g. storage2_name
+    storage3: # TODO e.g. storage3_name
     # Domain names for the webapp, authentication and qasmat's api
-    web_dns: subdomain1.domain.com
-    auth_dns: subdomain2.domain.com
-    api_dns: subdomain2.domain.com
-    domain: domain.com
-    # Docker images (names and versions are coming soon)
+    web_dns: # TODO e.g. subdomain1.domain.com
+    auth_dns: # TODO e.g. subdomain2.domain.com
+    api_dns: # TODO e.g. subdomain2.domain.com
+    domain: # TODO e.g. domain.com
     docker_images:
       repository: ghcr.io/veriqloud
       web:
-        name:
-        tag: v0.11.1
+        name: # TODO : provided by VeriQloud
+        tag: # TODO : provided by VeriQloud
       storage:
-        name:
-        tag: v0.2.23
+        name: # TODO : provided by VeriQloud
+        tag: # TODO : provided by VeriQloud
       proxy:
-        name:
-        tag: v0.2.23
+        name: # TODO : provided by VeriQloud
+        tag: # TODO : provided by VeriQloud
