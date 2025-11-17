@@ -22,10 +22,11 @@ Managed nodes in the inventory:
 - Distinct nodes to webapp/authentication, proxy (server that dispatches data) and storages are recommended.
 - Passwordless ssh access to all nodes.
 - Root access to all nodes.
-- Ubuntu OS for all nodes
+- The scripts are optimised to Ubuntu/Debian OS, we kindly recommend to use Ubuntu.
 
 DNS:
-Have a domain name and 3 subdomains linked to the corresponding services (see the inventory).
+- a domain name
+- three subdomains
 
 ## Setup
 
@@ -36,7 +37,7 @@ Have a domain name and 3 subdomains linked to the corresponding services (see th
 Follow the official Ansible installation guide for your operating system:
 🔗 [Ansible Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html)
 
-E.g. Ubuntu
+E.g. Ubuntu/Debian
 ```shell
 sudo apt install ansible
 ```
@@ -51,9 +52,9 @@ sudo dnf install ansible
 ```shell
 git clone git@github.com:Veriqloud/qasmat-swarm-deploy.git
 cd qasmat-swarm-deploy
-cp inventory_template.yaml inventory.yml
+cp inventory_template.yaml inventory.yaml
 ```
-Fill the `# TODO` values in `inventory.yml`.
+Fill the values in `inventory.yaml`.
 
 ### Install dependencies
 ```
@@ -67,8 +68,6 @@ ansible-galaxy install -r requirements.yaml
 # run ansible playbook with default inventory.yaml (set in ansible.cfg) 
 ansible-playbook playbooks/setup.yaml
 ```
-
-Storage servers may take some time to connect to the proxy due to DNS issue. We are currently working on this.
 
 
 ---
@@ -88,12 +87,10 @@ for example, given that certificates are copied to the server hosting the web se
 
 Users are configured in [users template](roles/add_web_config/templates/users.yml.j2). The default admin user is `qasmatadmin` password is `password`.
 
-## Usage
+## Note on usage
 
-The web interface is now accessible at `<web_dns>` (value in your inventory).
+The web interface will be accessible at `<web_dns>` provided in the customized `inventory.yaml`.
 
-To explore the logs you can ssh one of the nodes and use docker commands like `docker logs <id of the container>` or `docker inspect <id of the container>`.
-
-Don't hesitate to explore the [documentation](https://qasmat.veriqloud.fr/) for more information and reach out if anything is missing or if you have any suggestion.
+To explore the logs ssh into the manager node (proxy) and hit `docker service logs qasmat_<service_name>` or `docker service inspect qasmat_<service_name>`.
 
 Note : We will very soon be OAuth/OIDC compatible which means that Qasmat will be able to use identity providers such as Keycloak instead of our default Authelia instance. 
