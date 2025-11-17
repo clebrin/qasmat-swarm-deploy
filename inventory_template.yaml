@@ -3,34 +3,35 @@ all:
     _master:
       hosts:
         proxy:
-          ansible_host: # TODO : IP of the proxy, e.g. 0.0.0.0
+          ansible_host: 
     _worker:
       hosts:
         storage1:
-          ansible_host: # TODO : IP of storage 1, e.g. 0.0.0.0
+          ansible_host: 
         storage2:
-          ansible_host: # TODO : IP of storage 2, e.g. 0.0.0.0
-        storage3:
-          ansible_host: # TODO : IP of storage 3, e.g. 0.0.0.0
+          ansible_host: 
+          ansible_host: 
         web:
-          ansible_host: # TODO : IP of the web server, e.g. 0.0.0.0
+          ansible_host: 
   vars:
-    ansible_user: ubuntu
+    ansible_user: 
     ansible_port: 22
     github:
-      token: # TODO : GitHub token provided by VeriQloud
-      username: # TODO : GitHub username associated with the token
+      # In case you got access to private images; leave empty for public images
+      token:
+      username:
     # Storage names must be differents
-    storage1: # TODO e.g. storage1_name
-    storage2: # TODO e.g. storage2_name
-    storage3: # TODO e.g. storage3_name
-    # Domain names for the webapp, authentication and qasmat's api
-    web_dns: # TODO e.g. subdomain1.domain.com
-    auth_dns: # TODO e.g. subdomain2.domain.com
-    api_dns: # TODO e.g. subdomain2.domain.com
-    domain: # TODO e.g. domain.com
+    storage1: 
+    storage2: 
+    storage3: 
+    # Domain names for the webapp, authentication and qasmat's api e.g. domain.com 
+    # and subdomain.domain.com for web_dns/auth_dns/api_dns
+    web_dns: 
+    auth_dns: 
+    api_dns: 
+    domain: 
     docker_images:
-      repository: ghcr.io/veriqloud
+      repository: # TODO : provided by VeriQloud
       web:
         name: # TODO : provided by VeriQloud
         tag: # TODO : provided by VeriQloud
