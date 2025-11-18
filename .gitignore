@@ -7,3 +7,4 @@
 *.secret.j2
 inv_*
 inventory.yaml
+usersvq*

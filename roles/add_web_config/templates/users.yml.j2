@@ -1,9 +1,16 @@
 users:
   qasmatadmin:
-    displayname: qasmat user
+    displayname: qasmat admin
     password: $argon2id$v=19$m=65536,t=3,p=4$FScVhEPoXuggnukRPgnqaQ$iH9EPRZp/nxiMRPBl97NY1ya/1IkAv8HWUi+aYdFESo
     email: admin@domain.com
     groups:
     - users
     - admin
+    disabled: false
+  qasmatuser:
+    displayname: qasmat user
+    password: $argon2id$v=19$m=65536,t=3,p=4$FScVhEPoXuggnukRPgnqaQ$iH9EPRZp/nxiMRPBl97NY1ya/1IkAv8HWUi+aYdFESo
+    email: user@domain.com
+    groups:
+    - users
     disabled: false
