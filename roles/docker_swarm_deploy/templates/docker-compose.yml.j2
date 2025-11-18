@@ -94,6 +94,8 @@ services:
       placement:
         constraints:
           - node.hostname == {{ hostvars['storage1'].ansible_hostname }}
+    dns_search:
+      - vq.local
   {{ storage2 }}:
     image: "{{ docker_images.repository }}/{{ docker_images.storage.name }}:{{ docker_images.storage.tag }}"
     environment:
@@ -114,13 +116,15 @@ services:
       placement:
         constraints:
           - node.hostname == {{ hostvars['storage2'].ansible_hostname }}
+    dns_search:
+      - vq.local
   {{ storage3 }}:
     image: "{{ docker_images.repository }}/{{ docker_images.storage.name }}:{{ docker_images.storage.tag }}"
     environment:
       - NFLAG=-n
       - NAME={{ storage3 }}
       - CFLAG=-c
-      - CPATH=/Qasmat/config/storage-config-storage2.json
+      - CPATH=/Qasmat/config/storage-config-storage3.json
     restart: 'unless-stopped'
     depends_on:
       - proxy
@@ -134,8 +138,11 @@ services:
       placement:
         constraints:
           - node.hostname == {{ hostvars['storage3'].ansible_hostname }}
+    dns_search:
+      - vq.local
   proxy:
     image: "{{ docker_images.repository }}/{{ docker_images.proxy.name }}:{{ docker_images.proxy.tag }}"
+    hostname: proxy.vq.local
     environment:
       - NFLAG=
       - NAME=
@@ -152,3 +159,5 @@ services:
       placement:
         constraints:
           - node.hostname == {{ hostvars['proxy'].ansible_hostname }}
+    dns_search:
+      - vq.local
