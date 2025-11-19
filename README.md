@@ -1,16 +1,16 @@
 # qasmat-swarm-deploy
 Deploy qasmat with docker-swarm and ansible
 
-**Qasmat** is a secure distributed storage system based on Shamir's Secret Sharing to split files into pieces and store them on a network of storage servers. It ensures data availability even when some servers are offline, without compromising security as in traditional redundancy. The system prevents an attacker having access to some servers from gaining information on the protected files. More about qasmat: https://qasmat.veriqloud.fr.
+**Qasmat** is a secure distributed storage system based on Shamir's Secret Sharing to split files into pieces and store them on a network of storage servers. It ensures data availability even when some servers are offline, without compromising security as in traditional redundancy. The system prevents an attacker having access to some servers from gaining information on the protected files. More about qasmat: 🔗https://qasmat.veriqloud.fr.
 
-The aim of this repository is to provide a way to deploy and test qasmat quickly in your environment. For kubernetes based solutions, please kindly [contact us](https://veriqloud.com/contact/).
+The aim of this repository is to provide a way to deploy and test qasmat quickly in your environment. For kubernetes based solutions, please kindly 🔗[contact us](https://veriqloud.com/contact/).
 
 ## Components of the application
 
-- Webapp is based on [Caddy webserver](https://caddyserver.com/)
+- Webapp is based on [Caddy webserver](https://caddyserver.com/). Public docker image is available on 🔗[Docker Hub](https://hub.docker.com/r/veriqloud/qasmat-web).
 - Authentication with [Authelia](https://www.authelia.com/)
-- [Proxy](https://qasmat.veriqloud.fr/discovering/overview.html) server for data dispatch. Public docker image is coming soon.
-- [Storage](https://qasmat.veriqloud.fr/discovering/overview.html) servers who store the shares of the data. Public docker image is comming soon.
+- Proxy server for data dispatch. Public docker image is available on 🔗[Docker Hub](https://hub.docker.com/r/veriqloud/qasmat-proxy-lite).
+- Storage servers who store the shares of the data. Public docker image is available on 🔗[Docker Hub](https://hub.docker.com/r/veriqloud/qasmat-storage-lite).
 - Databases are set to default SQLite. PostgreSQL is coming soon.
 
 ## Prerequisites
@@ -87,7 +87,7 @@ for example, given that certificates are copied to the server hosting the web se
 
 Users are configured in [users template](roles/add_web_config/templates/users.yml.j2). The default admin user is `qasmatadmin` password is `password`.
 
-## Note on usage
+### Note on usage
 
 The web interface will be accessible at `<web_dns>` provided in the customized `inventory.yaml`.
 
